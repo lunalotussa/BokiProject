@@ -215,6 +215,9 @@ a:hover {
               <p><font size="4"><b>Perkiraan Pajak Tahun Ini : <?php echo "Rp ".number_format($beban_pajak_tahunan, 2, ",", ".");?></b></font></p>
               <?php }}?>
               <br>
+              <center>
+                <p><b><font size="3">"Apabila usaha Anda mengalami kerugian pada bulan tertentu, maka jumlah beban bulan tersebut tidak perlu dibayarkan. Informasi selengkapnya bisa Anda lihat di www.pajak.go.id"</font></b></p>
+              </center><br>
               <center><a href="#" title="Tutup Modal Box">Tutup</a></center>
             </figure>
     </div>
