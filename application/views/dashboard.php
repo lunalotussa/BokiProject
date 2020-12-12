@@ -216,7 +216,7 @@ a:hover {
               <?php }}?>
               <br>
               <center>
-                <p><b><font size="3">"Apabila usaha Anda mengalami kerugian pada bulan tertentu, maka jumlah beban bulan tersebut tidak perlu dibayarkan. Informasi selengkapnya bisa Anda lihat di www.pajak.go.id"</font></b></p>
+                <p><b><font size="3">"Apabila usaha Anda mengalami kerugian pada bulan tertentu, maka jumlah beban pajak bulan tersebut tidak perlu dibayarkan. Informasi selengkapnya bisa Anda lihat di www.pajak.go.id"</font></b></p>
               </center><br>
               <center><a href="#" title="Tutup Modal Box">Tutup</a></center>
             </figure>
