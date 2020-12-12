@@ -3,9 +3,10 @@
   <title>Laporan Posisi Keuangan</title>
 </head>
 <body>
-<h3 style="text-align: center;">LAPORAN POSISI KEUANGAN TAHUNAN</h3>
+<h3 style="text-align: center;">LAPORAN POSISI KEUANGAN BULANAN</h3>
 <h4 style="text-align: center;">Toko <?php echo $nama;?></h4>
 <p style="text-align: center;"><b>Per Tanggal <?php echo date("d-m-Y");?></b></p>
+<CENTER><a href="<?php echo base_url('index.php/LPK/cetak_bulanan'); ?>">Cetak Data</a></CENTER><br>
 
 <style>
 table {
@@ -77,7 +78,7 @@ table, td, th {
 </tr>
 
 <?php
-    $sql    ="SELECT SUM(total) as total_piutang FROM penjualan WHERE id_user=$id_user AND status='Belum Lunas' AND YEAR(tanggal) = YEAR(CURRENT_DATE())";
+    $sql    ="SELECT SUM(total) as total_piutang FROM penjualan WHERE id_user=$id_user AND status='Belum Lunas' AND YEAR(tanggal) = YEAR(CURRENT_DATE()) AND MONTH(tanggal) = MONTH(CURRENT_DATE())";
     $query  = $this->db->query($sql);
     foreach ($query->Result() as $b)
     {
@@ -110,7 +111,7 @@ table, td, th {
   <td></td>
 </tr>
 <?php
-    $sql    ="SELECT * FROM aset_tetap WHERE id_user=$id_user AND YEAR(tanggal) = YEAR(CURRENT_DATE())";
+    $sql    ="SELECT * FROM aset_tetap WHERE id_user=$id_user AND YEAR(tanggal) = YEAR(CURRENT_DATE()) AND MONTH(tanggal) = MONTH(CURRENT_DATE())";
     $query  = $this->db->query($sql);
     foreach ($query->Result() as $a)
     {
@@ -127,7 +128,7 @@ table, td, th {
 <!--------end aset tetap & start total aset tetap---------->
 <!---end aset lancar start sum aset lancar-->
 <?php
-    $sql    ="SELECT SUM(nilai-penyusutan) as total_tetap FROM aset_tetap WHERE id_user=$id_user AND YEAR(tanggal) = YEAR(CURRENT_DATE())";
+    $sql    ="SELECT SUM(nilai-penyusutan) as total_tetap FROM aset_tetap WHERE id_user=$id_user AND YEAR(tanggal) = YEAR(CURRENT_DATE()) AND MONTH(tanggal) = MONTH(CURRENT_DATE())";
     $query  = $this->db->query($sql);
     foreach ($query->Result() as $c)
     {
@@ -168,7 +169,7 @@ table, td, th {
 </tr>
 <!----start hutang---->
 <?php
-    $sql    ="SELECT * FROM pengeluaran WHERE id_user=$id_user AND status='Belum Lunas' AND YEAR(tanggal) = YEAR(CURRENT_DATE())";
+    $sql    ="SELECT * FROM pengeluaran WHERE id_user=$id_user AND status='Belum Lunas' AND YEAR(tanggal) = YEAR(CURRENT_DATE()) AND MONTH(tanggal) = MONTH(CURRENT_DATE())";
     $query  = $this->db->query($sql);
     foreach ($query->Result() as $a)
     {
@@ -183,7 +184,7 @@ table, td, th {
 </tr>
 <?php } ?>
 <?php
-    $sql    ="SELECT SUM(total) as hutang FROM pengeluaran WHERE id_user=$id_user AND status='Belum Lunas' AND YEAR(tanggal) = YEAR(CURRENT_DATE())";
+    $sql    ="SELECT SUM(total) as hutang FROM pengeluaran WHERE id_user=$id_user AND status='Belum Lunas' AND YEAR(tanggal) = YEAR(CURRENT_DATE()) AND MONTH(tanggal) = MONTH(CURRENT_DATE())";
     $query  = $this->db->query($sql);
     foreach ($query->Result() as $d)
     {
@@ -216,7 +217,7 @@ table, td, th {
   <th></th>
 </tr>
 <?php
-    $sql    ="SELECT SUM(jumlah) as penambahan FROM modal WHERE id_user=$id_user AND status='Penambahan' AND YEAR(tanggal) = YEAR(CURRENT_DATE())";
+    $sql    ="SELECT SUM(jumlah) as penambahan FROM modal WHERE id_user=$id_user AND status='Penambahan' AND YEAR(tanggal) = YEAR(CURRENT_DATE()) AND MONTH(tanggal) = MONTH(CURRENT_DATE())";
     $query  = $this->db->query($sql);
     foreach ($query->Result() as $a)
     {
@@ -230,7 +231,7 @@ table, td, th {
   <td></td>
 </tr>
 <?php 
-    $sql    ="SELECT SUM(jumlah) as pengurangan FROM modal WHERE id_user=$id_user AND status='Pengurangan' AND YEAR(tanggal) = YEAR(CURRENT_DATE())";
+    $sql    ="SELECT SUM(jumlah) as pengurangan FROM modal WHERE id_user=$id_user AND status='Pengurangan' AND YEAR(tanggal) = YEAR(CURRENT_DATE()) AND MONTH(tanggal) = MONTH(CURRENT_DATE())";
     $query  = $this->db->query($sql);
     foreach ($query->Result() as $b)
     {
@@ -282,13 +283,13 @@ if($aktiva==$pasiva){
 <?php }else{ ?>
 <table>
   <tr>
-    <td><b>Selisih : <?php echo "Rp ".number_format($pasiva-$aktiva, 2, ",", "."); ?></b></td>
+    <td><b>Selisih : <?php echo "Rp ".number_format($aktiva-$pasiva, 2, ",", "."); ?></b></td>
   </tr>
   <tr>
     <td><b>"Opps, terdapat selisih antara Aktiva (Aset) dan Pasiva (Utang & Modal). Coba periksa kembali input transaksi Anda. Apabila selisih sama dengan jumlah Rugi/Laba, pencatatan keuangan Anda sudah benar."</b></td>
   </tr>
   <tr>
-    <td><b>"Pencatatan Anda benar apabila selisih di atas = Laba / Rugi Bersih + Beban Pajak"</b></td>
+    <td><center><b>"Pencatatan Anda benar apabila selisih di atas = Laba / Rugi Bersih + Beban Pajak"</b></center></td>
   </tr>
 </table>
 <?php } ?>

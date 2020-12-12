@@ -3,7 +3,7 @@
   <title>Laporan Posisi Keuangan</title>
 </head>
 <body>
-<h3 style="text-align: center;">LAPORAN POSISI KEUANGAN</h3>
+<h3 style="text-align: center;">LAPORAN POSISI KEUANGAN TAHUNAN</h3>
 <h4 style="text-align: center;">Toko <?php echo $nama;?></h4>
 <p style="text-align: center;"><b>Per Tanggal <?php echo date("d-m-Y");?></b></p>
 <CENTER><a href="<?php echo base_url('index.php/LPK/cetak'); ?>">Cetak Data</a></CENTER><br>
@@ -86,7 +86,7 @@ table, td, th {
 ?>
 <tr>
   <td></td>
-  <td><b>Total Piutang</b></td>
+  <td><b>Total Piutang Dalam Usaha Berjalan</b></td>
   <td></td>
   <td></td>
   <td></td>
@@ -287,6 +287,9 @@ if($aktiva==$pasiva){
   </tr>
   <tr>
     <td><b>"Opps, terdapat selisih antara Aktiva (Aset) dan Pasiva (Utang & Modal). Coba periksa kembali input transaksi Anda. Apabila selisih sama dengan jumlah Rugi/Laba, pencatatan keuangan Anda sudah benar."</b></td>
+  </tr>
+  <tr>
+    <td><center><b>"Pencatatan Anda benar apabila selisih di atas = Laba / Rugi Bersih + Beban Pajak"</b></center></td>
   </tr>
 </table>
 <?php } ?>

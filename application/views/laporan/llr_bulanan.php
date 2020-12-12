@@ -3,9 +3,10 @@
   <title>Laporan Laba Rugi</title>
 </head>
 <body>
-<h3 style="text-align: center;">LAPORAN LABA RUGI TAHUNAN</h3>
+<h3 style="text-align: center;">LAPORAN LABA RUGI BULANAN</h3>
 <h4 style="text-align: center;">Toko <?php echo $nama;?></h4>
-<p style="text-align: center;"><b>Untuk Periode Yang Berakhir Pada Tahun <?php echo date("Y") . "<br>";?></b></p>
+<p style="text-align: center;"><b>Untuk Periode Yang Berakhir Pada Bulan <?php echo date("F Y") . "<br>";?></b></p>
+<CENTER><a href="<?php echo base_url('index.php/LLR/cetak_bulanan'); ?>">Cetak Data</a></CENTER><br>
 
 <style>
 table {
@@ -21,7 +22,7 @@ table, td, th {
 <table border="0">
 <tr>
   <?php
-  $sql    ="SELECT SUM(total) as total_penjualan from penjualan WHERE id_user=$id_user AND YEAR(tanggal) = YEAR(CURRENT_DATE())";
+  $sql    ="SELECT SUM(total) as total_penjualan from penjualan WHERE id_user=$id_user AND YEAR(tanggal) = YEAR(CURRENT_DATE()) AND MONTH(tanggal) = MONTH(CURRENT_DATE())";
   $query  = $this->db->query($sql);
   if ($query->num_rows() > 0) {
   foreach ($query->result() as $a) {
@@ -51,7 +52,7 @@ table, td, th {
 
   <!--sum total pengeluaran-->
   <?php
-  $sql1   ="SELECT COUNT(total) as jumlah_persediaan from pengeluaran WHERE id_user=$id_user AND jenis='Persediaan' AND YEAR(tanggal) = YEAR(CURRENT_DATE())";
+  $sql1   ="SELECT COUNT(total) as jumlah_persediaan from pengeluaran WHERE id_user=$id_user AND jenis='Persediaan' AND YEAR(tanggal) = YEAR(CURRENT_DATE()) AND MONTH(tanggal) = MONTH(CURRENT_DATE())";
   $query1  = $this->db->query($sql1);
   if ($query1->num_rows() > 0) {
   foreach ($query1->result() as $z) {
@@ -59,7 +60,7 @@ table, td, th {
     if ($jumlah_persediaan==0) {
         $total_pengeluaran = 0;
     }else{
-        $sql    ="SELECT SUM(total) as total_pengeluaran from pengeluaran WHERE id_user=$id_user AND jenis='Persediaan' AND YEAR(tanggal) = YEAR(CURRENT_DATE())";
+        $sql    ="SELECT SUM(total) as total_pengeluaran from pengeluaran WHERE id_user=$id_user AND jenis='Persediaan' AND YEAR(tanggal) = YEAR(CURRENT_DATE()) AND MONTH(tanggal) = MONTH(CURRENT_DATE())";
         $query  = $this->db->query($sql);
         if ($query->num_rows() > 0) {
         foreach ($query->result() as $b) {
@@ -72,7 +73,7 @@ table, td, th {
 
   <!--sum qty pengeluaran-->
   <?php
-  $sql1   ="SELECT COUNT(total) as jumlah_persediaan from pengeluaran WHERE id_user=$id_user AND jenis='Persediaan' AND YEAR(tanggal) = YEAR(CURRENT_DATE())";
+  $sql1   ="SELECT COUNT(total) as jumlah_persediaan from pengeluaran WHERE id_user=$id_user AND jenis='Persediaan' AND YEAR(tanggal) = YEAR(CURRENT_DATE()) AND MONTH(tanggal) = MONTH(CURRENT_DATE())";
   $query1  = $this->db->query($sql1);
   if ($query1->num_rows() > 0) {
   foreach ($query1->result() as $x) {
@@ -80,7 +81,7 @@ table, td, th {
     if ($jumlah_persediaan==0) {
         $qty_pengeluaran = 0;
     }else{
-        $sql    ="SELECT SUM(kuantitas) as qty_pengeluaran from pengeluaran WHERE id_user=$id_user AND jenis='Persediaan' AND YEAR(tanggal) = YEAR(CURRENT_DATE())";
+        $sql    ="SELECT SUM(kuantitas) as qty_pengeluaran from pengeluaran WHERE id_user=$id_user AND jenis='Persediaan' AND YEAR(tanggal) = YEAR(CURRENT_DATE()) AND MONTH(tanggal) = MONTH(CURRENT_DATE())";
         $query  = $this->db->query($sql);
         if ($query->num_rows() > 0) {
         foreach ($query->result() as $e) {
@@ -93,7 +94,7 @@ table, td, th {
 
   <!--sum qty penjualan + hitung hpp -->
   <?php
-  $sql    ="SELECT SUM(kuantitas) as qty_penjualan from penjualan WHERE id_user=$id_user AND YEAR(tanggal) = YEAR(CURRENT_DATE())";
+  $sql    ="SELECT SUM(kuantitas) as qty_penjualan from penjualan WHERE id_user=$id_user AND YEAR(tanggal) = YEAR(CURRENT_DATE()) AND MONTH(tanggal) = MONTH(CURRENT_DATE())";
   $query  = $this->db->query($sql);
   if ($query->num_rows() > 0) {
   foreach ($query->result() as $b) {
@@ -133,7 +134,7 @@ table, td, th {
   <th></th>
 </tr>
 <?php
-  $sql    ="SELECT * from pengeluaran WHERE id_user=$id_user AND YEAR(tanggal) = YEAR(CURRENT_DATE()) AND jenis='Beban'";
+  $sql    ="SELECT * from pengeluaran WHERE id_user=$id_user AND YEAR(tanggal) = YEAR(CURRENT_DATE()) AND jenis='Beban' AND MONTH(tanggal) = MONTH(CURRENT_DATE())";
   $query  = $this->db->query($sql);
   if ($query->num_rows() > 0) {
   foreach ($query->result() as $a) {
@@ -157,10 +158,11 @@ table, td, th {
 </tr>
 <!----total beban usaha-->
 <?php
-  $sql    ="SELECT SUM(total) as total_beban from pengeluaran WHERE id_user=$id_user AND YEAR(tanggal) = YEAR(CURRENT_DATE()) AND jenis='Beban'";
+  $sql    ="SELECT SUM(total) as total_beban from pengeluaran WHERE id_user=$id_user AND YEAR(tanggal) = YEAR(CURRENT_DATE()) AND jenis='Beban' AND MONTH(tanggal) = MONTH(CURRENT_DATE())";
   $query  = $this->db->query($sql);
   if ($query->num_rows() > 0) {
   foreach ($query->result() as $a) {
+  $beban_usaha = $a->total_beban;
   ?>
 <tr style="width: 20%">
   <th></th>
@@ -168,7 +170,7 @@ table, td, th {
   <th></th>
   <th></th>
   <th></th>
-  <th><?php echo "Rp ".number_format($a->total_beban, 2, ",", ".");?></th>
+  <th><?php echo "Rp ".number_format($beban_usaha, 2, ",", ".");?></th>
 </tr>
 <?php }} ?>
 <!----beban lain-lain--->
@@ -183,7 +185,7 @@ table, td, th {
 
 <!----sum aset tetap bagunan--->
 <?php
-  $sql    ="SELECT SUM(penyusutan) as total_bagunan from aset_tetap WHERE id_user=$id_user AND YEAR(tanggal) = YEAR(CURRENT_DATE()) AND jenis='Bangunan'";
+  $sql    ="SELECT SUM(penyusutan) as total_bagunan from aset_tetap WHERE id_user=$id_user AND YEAR(tanggal) = YEAR(CURRENT_DATE()) AND jenis='Bangunan' AND MONTH(tanggal) = MONTH(CURRENT_DATE())";
   $query  = $this->db->query($sql);
   if ($query->num_rows() > 0) {
   foreach ($query->result() as $a) {
@@ -200,7 +202,7 @@ table, td, th {
 
 <!----sum aset tetap non bagunan--->
 <?php
-  $sql    ="SELECT SUM(penyusutan) as total_nonbagunan from aset_tetap WHERE id_user=$id_user AND YEAR(tanggal) = YEAR(CURRENT_DATE()) AND jenis='Non Bangunan'";
+  $sql    ="SELECT SUM(penyusutan) as total_nonbagunan from aset_tetap WHERE id_user=$id_user AND YEAR(tanggal) = YEAR(CURRENT_DATE()) AND jenis='Non Bangunan' AND MONTH(tanggal) = MONTH(CURRENT_DATE())";
   $query  = $this->db->query($sql);
   if ($query->num_rows() > 0) {
   foreach ($query->result() as $b) {
@@ -237,7 +239,7 @@ table, td, th {
 
 <!----beban PAJAK--->
 <?php
-  $sql    ="SELECT SUM(total) as total_penjualan from penjualan WHERE id_user=$id_user AND YEAR(tanggal) = YEAR(CURRENT_DATE())";
+  $sql    ="SELECT SUM(total) as total_penjualan from penjualan WHERE id_user=$id_user AND YEAR(tanggal) = YEAR(CURRENT_DATE()) AND MONTH(tanggal) = MONTH(CURRENT_DATE())";
   $query  = $this->db->query($sql);
   if ($query->num_rows() > 0) {
   foreach ($query->result() as $c) {
@@ -259,7 +261,7 @@ table, td, th {
   <th></th>
   <th></th>
   <th></th>
-  <th><?php echo "Rp ".number_format(($laba_kotor-$beban_operasi-$beban_pajak_tahunan), 2, ",", ".");?></th>
+  <th><?php echo "Rp ".number_format(($laba_kotor-$beban_usaha-$beban_operasi-$beban_pajak_tahunan), 2, ",", ".");?></th>
 </tr>
 </table>
 

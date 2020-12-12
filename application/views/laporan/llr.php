@@ -3,7 +3,7 @@
   <title>Laporan Laba Rugi</title>
 </head>
 <body>
-<h3 style="text-align: center;">LAPORAN LABA RUGI</h3>
+<h3 style="text-align: center;">LAPORAN LABA RUGI TAHUNAN</h3>
 <h4 style="text-align: center;">Toko <?php echo $nama;?></h4>
 <p style="text-align: center;"><b>Untuk Periode Yang Berakhir Pada Tahun <?php echo date("Y") . "<br>";?></b></p>
 <CENTER><a href="<?php echo base_url('index.php/LLR/cetak'); ?>">Cetak Data</a></CENTER><br>
