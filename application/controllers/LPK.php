@@ -11,13 +11,13 @@ class LPK extends CI_Controller {
             redirect(base_url());
         }
 
-		$this->load->model('lpk_model');
+		//$this->load->model('lpk_model');
 	}
 
 	public function index(){
 		$data['nama']       = $_SESSION['nama'];
         $data['id_user']    = $_SESSION['id_user'];
-		$data['aset_lancar'] = $this->lpk_model->view_row();
+		//$data['aset_lancar'] = $this->lpk_model->view_row();
 		$this->load->view('laporan/lpk', $data);
 	}
 
@@ -25,7 +25,7 @@ class LPK extends CI_Controller {
 		$data['nama']       = $_SESSION['nama'];
         $data['id_user']    = $_SESSION['id_user'];
 		ob_start();
-		$data['aset_Lancar'] = $this->lpk_model->view_row();
+		//$data['aset_Lancar'] = $this->lpk_model->view_row();
 		$this->load->view('laporan/print', $data);
 		$html = ob_get_contents();
         ob_end_clean();
@@ -40,7 +40,7 @@ class LPK extends CI_Controller {
 	public function bulanan(){
 		$data['nama']       = $_SESSION['nama'];
         $data['id_user']    = $_SESSION['id_user'];
-		$data['aset_lancar'] = $this->lpk_model->view_row();
+		//$data['aset_lancar'] = $this->lpk_model->view_row();
 		$this->load->view('laporan/lpk_bulanan', $data);
 	}
 
@@ -48,7 +48,7 @@ class LPK extends CI_Controller {
 		$data['nama']       = $_SESSION['nama'];
         $data['id_user']    = $_SESSION['id_user'];
 		ob_start();
-		$data['aset_Lancar'] = $this->lpk_model->view_row();
+		//$data['aset_Lancar'] = $this->lpk_model->view_row();
 		$this->load->view('laporan/print_lpk_bulanan', $data);
 		$html = ob_get_contents();
         ob_end_clean();
